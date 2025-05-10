@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# setup.sh — Ubuntu 24.04 hardening + non-root sudo user
+# serversetup.sh — Ubuntu 24.04 hardening + non-root sudo user + Docker install
 #
 # Usage (as root):
 #   SSH_PORT=2222 NEW_USER=deploy ADMIN_EMAIL=you@example.com bash serversetup.sh
