@@ -47,11 +47,11 @@ This script (`serversetup.sh`) bootstraps a **fresh Hetzner Ubuntu 24.04** serve
    From your local machine, invoke:
    ```bash
    ssh root@YOUR.SERVER.IP \
-  'SSH_PORT=2222 \
-   NEW_USER=deploy \
-   ADMIN_EMAIL=you@example.com \
-   NEW_USER_PUBKEY="$(< ~/.ssh/id_rsa.pub)" \
-   bash -s' < serversetup.sh
+    'SSH_PORT=2222 \
+    NEW_USER=deploy \
+    ADMIN_EMAIL=you@example.com \
+    NEW_USER_PUBKEY="$(< ~/.ssh/id_rsa.pub)" \
+    bash -s' < serversetup.sh
    ```
    If you omit NEW_USER_PUBKEY, the script will copy the existing /root/.ssh/authorized_keys into the new account.
 3. **Log in**
