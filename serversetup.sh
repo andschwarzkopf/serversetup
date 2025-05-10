@@ -3,7 +3,7 @@
 # setup.sh — Ubuntu 24.04 hardening + non-root sudo user
 #
 # Usage (as root):
-#   SSH_PORT=2222 NEW_USER=deploy ADMIN_EMAIL=you@example.com bash setup.sh
+#   SSH_PORT=2222 NEW_USER=deploy ADMIN_EMAIL=you@example.com bash serversetup.sh
 #
 # (c) Andreas Schwarzkopf 2025
 #
