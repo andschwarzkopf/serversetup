@@ -62,8 +62,11 @@ This script (`serversetup.sh`) bootstraps a **fresh Hetzner Ubuntu 24.04** serve
    ```
 4. **Verify**
    ```ufw status``` — confirm your firewall rules.
+
    ```ss -tulpn | grep sshd``` — ensure SSH is listening on your custom port.
+
    Inspect ```/etc/apt/apt.conf.d/50unattended-upgrades``` for your ```ADMIN_EMAIL```.
+   
    ```fail2ban-client status sshd``` — confirm the SSH jail is active.
 
 Your server is now patched, firewalled, and hardened with best-practice SSH access via a non-root sudo user.
