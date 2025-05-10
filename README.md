@@ -11,6 +11,7 @@ This script (`serversetup.sh`) bootstraps a **fresh Hetzner Ubuntu 24.04** serve
 5. **SSH hardening**: keys-only, root disabled, custom port, binding to all interfaces
 6. **Automatic security updates** via unattended-upgrades
 7. **Fail2Ban jail** for SSH
+8. **Installation** of Docker CE, containerd, and the Docker Compose V2 plugin  
 
 ---
 
@@ -60,7 +61,7 @@ This script (`serversetup.sh`) bootstraps a **fresh Hetzner Ubuntu 24.04** serve
    ssh -p 2222 deploy@YOUR.SERVER.IP
    sudo -i
    ```
-4. **Verify**
+4. **Verify SSH & security**
 
    ```ufw status``` — confirm your firewall rules.
 
@@ -69,5 +70,11 @@ This script (`serversetup.sh`) bootstraps a **fresh Hetzner Ubuntu 24.04** serve
    Inspect ```/etc/apt/apt.conf.d/50unattended-upgrades``` for your ```ADMIN_EMAIL```.
 
    ```fail2ban-client status sshd``` — confirm the SSH jail is active.
+
+5. **Verify Docker & Compose**
+
+   ```docker --version``` — e.g. Docker version 28.x.x, build ...
+
+   ```docker compose version``` — e.g. Docker Compose version v2.x.x
 
 Your server is now patched, firewalled, and hardened with best-practice SSH access via a non-root sudo user.
