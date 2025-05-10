@@ -98,6 +98,18 @@ findtime  = 600
 EOF
 systemctl restart fail2ban
 
+### 10. Install Docker & docker-compose (v1)
+echo "→ Installing Docker Engine and docker-compose (v1)…"
+apt update
+apt install -y docker.io docker-compose
+
+echo "→ Enabling and starting Docker service…"
+systemctl enable --now docker
+
+echo "→ Verifying installation…"
+docker --version           # e.g. Docker version 26.x.x
+docker-compose --version   # e.g. docker-compose version 1.x.x
+
 ### Done
 echo "✅ Setup complete!"
 echo "   • SSH as '$NEW_USER': ssh -p ${SSH_PORT} ${NEW_USER}@<server-ip>"
