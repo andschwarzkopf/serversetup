@@ -34,10 +34,10 @@ This script (`serversetup.sh`) bootstraps a **fresh Hetzner Ubuntu 24.04** serve
 ## Usage
 
 1. **Obtain the script**
-   Upload `setup.sh` to your server, or pipe it directly:
+   Upload `serversetup.sh` to your server, or pipe it directly:
 
    ```bash
-   scp setup.sh root@YOUR.SERVER.IP:/root/
+   scp serversetup.sh root@YOUR.SERVER.IP:/root/
    ```
    or
    ```bash
