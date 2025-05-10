@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# serversetup.sh — Ubuntu 24.04 hardening + non-root sudo user + Docker install
+# setup.sh — Ubuntu 24.04 hardening + non-root sudo user
 #
 # Usage (as root):
 #   SSH_PORT=2222 NEW_USER=deploy ADMIN_EMAIL=you@example.com bash serversetup.sh
@@ -98,17 +98,38 @@ findtime  = 600
 EOF
 systemctl restart fail2ban
 
-### 10. Install Docker & docker-compose (v1)
-echo "→ Installing Docker Engine and docker-compose (v1)…"
-apt update
-apt install -y docker.io docker-compose
+### 10. Install Docker CE & Compose V2 plugin (non-interactive)
+echo "→ Installing Docker CE & Compose V2 plugin from Docker’s official repo…"
 
-echo "→ Enabling and starting Docker service…"
+# 10.1 prerequisites
+apt update
+DEBIAN_FRONTEND=noninteractive apt install -y \
+  ca-certificates curl gnupg lsb-release
+
+# 10.2 add Docker’s GPG key (force overwrite if exists)
+install -m0755 -d /etc/apt/keyrings
+rm -f /etc/apt/keyrings/docker.gpg
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
+  | gpg --yes --dearmor -o /etc/apt/keyrings/docker.gpg
+
+# 10.3 add the repo
+echo \
+  "deb [arch=$(dpkg --print-architecture) \
+        signed-by=/etc/apt/keyrings/docker.gpg] \
+    https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) stable" \
+  | tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# 10.4 install packages
+apt update
+DEBIAN_FRONTEND=noninteractive apt install -y \
+  docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+# 10.5 enable & start
 systemctl enable --now docker
 
-echo "→ Verifying installation…"
-docker --version           # e.g. Docker version 26.x.x
-docker-compose --version   # e.g. docker-compose version 1.x.x
+echo "→ Docker version: $(docker --version)"
+echo "→ Compose plugin: $(docker compose version)"
 
 ### Done
 echo "✅ Setup complete!"
